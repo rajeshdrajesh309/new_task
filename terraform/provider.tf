@@ -6,7 +6,7 @@ provider "aws" {
       Environment = var.environment
       Project     = "DevOps-Assessment"
       ManagedBy   = "Terraform"
-      Owner       = "Rajesh"
+      Owner       = "Ownername"
     }
   }
 }
