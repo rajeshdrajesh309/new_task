@@ -1,0 +1,31 @@
+                                    Internet
+                                        │
+                                     Route 53 
+                                        │
+                                 Internet Gateway
+                                        │
+                          ┌────────────────────────┐
+                          │          VPC           │
+                          │     10.0.0.0/16        │
+                          └────────────────────────┘
+                                        │
+                 ┌──────────────────────┴──────────────────────┐
+                 │                                             │
+          Public Route Table                          Private Route Table
+                 │                                             │
+        ┌────────┴────────┐                     ┌──────────────┴─────────────┐
+        │                 │                     │                            │
+ Public Subnet      Bastion Host          Private Subnet-1           Private Subnet-2
+ 10.0.1.0/24         (t3.micro)            10.0.2.0/24               10.0.3.0/24
+        │                                       │                           │
+        │                                 EC2 Application             RDS Subnet Group
+        │                                       │                     (Private Subnets)
+        │                                       │                           │
+        │                                 Security Group              Amazon RDS MySQL
+        │                                       │
+        │
+        └───────────────────────────────────────────────────────────────────────────────
+
+                                CloudWatch Monitoring
+
+                    GitHub → Jenkins → EC2 Deployment (CI/CD)
