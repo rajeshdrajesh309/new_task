@@ -1,12 +1,13 @@
 ############################################
-# RDS Subnet Group
+# DB Subnet Group
 ############################################
 
 resource "aws_db_subnet_group" "main" {
   name = "production-db-subnet-group"
 
   subnet_ids = [
-    aws_subnet.private.id
+    aws_subnet.private.id,
+    aws_subnet.private2.id
   ]
 
   tags = {
@@ -15,7 +16,7 @@ resource "aws_db_subnet_group" "main" {
 }
 
 ############################################
-# RDS MySQL Instance
+# Amazon RDS MySQL
 ############################################
 
 resource "aws_db_instance" "mysql" {
@@ -42,15 +43,15 @@ resource "aws_db_instance" "mysql" {
 
   publicly_accessible = false
 
-  skip_final_snapshot = true
-
-  deletion_protection = false
-
   multi_az = false
+
+  storage_encrypted = true
 
   backup_retention_period = 7
 
-  storage_encrypted = true
+  skip_final_snapshot = true
+
+  deletion_protection = false
 
   tags = {
     Name = "production-mysql"
